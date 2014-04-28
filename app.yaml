@@ -1,0 +1,50 @@
+application: gtangaza
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /images
+  static_dir: static/images
+
+- url: /css
+  static_dir: static/css
+
+- url: /fonts
+  static_dir: static/fonts
+
+- url: /js
+  static_dir: static/js
+
+- url: /post
+  script: main_post.py
+
+- url: /addsubdomain
+  script: main_post.py
+
+- url: /subscription
+  script: main_post.py
+
+- url: /unsubscribe
+  script: main_post.py
+
+- url: /remove_subdomain
+  script: main_post.py
+
+- url: /settings
+  script: main_post.py
+
+- url: /signup
+  script: main_post.py
+
+- url: /new_category
+  script: main_post.py
+
+- url: /view/.*
+  script: asklogin.py
+
+- url: /event/.*
+  script: asklogin.py
+
+- url: /.*
+  script: asklogin.py

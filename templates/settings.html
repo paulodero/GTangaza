@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Personal Settings</title>
+
+<script type="text/javascript" src="/js/validateForm.js"></script>
+</head>
+<body>
+<div id="publicSettings">
+	<form name="settingsForm" action="/settings" class="formatForm" onsubmit="return validateMobileNumber()" >
+		<label>Enter Mobile Number e.g +254729xxxxxx</label>
+		<input type="text" name="mobileNumber" id="settingsForm" >
+		<input type="submit" value="Add" class="status-button atd-button" />
+	</form>
+</div>
+<div id="adminSettings">
+{% if isAdministrator %}
+
+<form action="/addsubdomain" class="formatForm" onsubmit="return validateSubdomain()">
+   <label>Enter sub domain to add</label>
+   <input type="text" name="subdomain" id="subdomain"><br>
+   <input type="submit" value="Add" class="status-button atd-button">   
+</form>
+
+</div>
+
+
+<h4>Registered Domains</h4>
+<ul>
+{% for subdomain in subdomains %}
+<li> {{ subdomain.subdomain }} <a href="/remove_subdomain?q={{ subdomain.subdomain }}" class="side-links">Remove</a>
+{% endfor %}
+{% endif %}
+</ul>
+
+<div id="profile">
+<h4>Personal information</h4>
+<table>
+<tr><td>Mobile Number: </td><td> {{ mobileNumber }}<td></tr>
+<tr><td>Email Address: </td><td>{{ owner }}</td></tr>
+</table>
+</div>
+</body>
+</html>

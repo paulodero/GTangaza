@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<title>Upcoming events</title>
+
+<script type="text/javascript" src="/js/accordion.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+<div class='accordion'>
+{% for event in events %}
+<h3>
+   <table width='800px'>
+         <tr><td>{{ event.event_date }}</td><td>There will be a {{ event.event_title }} at
+             {{ event.event_venue }} to be attended by {{ event.target_audience }} starting from 
+             {{ event.start_time }} to {{ event.stop_time }}</td>
+         </tr>
+   </table>
+</h3> 
+<form>{{ event.event_description }}</form>
+{% endfor %}
+</div>
+</body>
+</html>

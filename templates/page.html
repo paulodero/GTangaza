@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--[if lt IE 7 ]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- HTML 5 Boilerplate -->
+<link rel="stylesheet" href="/css/base_style.css?v=2">
+<!-- G-Tangaza specific styles -->
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/jq.css">
+<link rel="stylesheet" type="text/css" href="/css/menuExpander.css">
+<link rel="stylesheet" type="text/css" href="/css/jquery.ui.timepicker.css">
+
+<script type="text/javascript"
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+<script type="text/javascript"
+	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.js"></script>
+
+<!-- JavaScript for UI elements  -->
+<script type="text/javascript" src="/js/ui.js"></script>
+<script type="text/javascript" src="/js/accordion.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/js/validateForm.js"></script>
+<script type="text/javascript">
+    var filters = [];
+    {% for filter in filters %}
+    filters.push("{{filter}}=");
+    {% endfor %}
+    filters.push("id=");
+    var currentUser = '{{ owner }}';
+  </script>
+<title>G-Tangaza</title>
+</head>
+<body>
+	<div id="container">
+		<header>
+		<div id="userinfo">
+			{{ owner }}<br>Not {{ nickname }} ? <a href={{logout_url}}>
+				Sign out</a>
+		</div>
+		<div id="logo"></div>
+		<input type="text" id="search-box" value=""  onblur="return searchEvents()"></input> <a
+			class="atd-button atd-search-button" style="margin-top: 10px;"> <img
+			src="/images/theme/icons/search-white.png" />
+		</a> </header>
+		<div id="options_bar">
+			<div id="app_title">G-Tangaza</div>
+			{% for category in categories %}
+			<a href='/view/events?q={{category.category_name|removeSpacesInString}}'
+				class="menu-button atd-button" id="assign-button"><span
+				class="atd-button-label">{{category.category_name }}</span><span class="atd-arrow"></span></a>
+			{% endfor %}
+
+			<a href="/view/settings" class="settings-button atd-button no-margin right"><img
+				src="/images/theme/icons/options.png" /></a>
+		</div>
+		<div id="sidebar">
+			<div>
+				<br> <a class="status-button atd-button"
+					href="/event/create_event">Create Event</a>
+			</div>
+			{% block sidebar %}
+			<ul>
+				<li class="selected mine" name="{{ owner }}">Events to Attend</li>
+				<li class="selected mineall" name="{{ owner }}_all"><a
+					href='/view/events?q=all'>Events scheduled(All)</a></li>
+				<div id="">
+					All categories
+					{% if isAdministrator %}
+					 <a href="/event/new_category" class="side-links">Add New</a>
+					 {% endif %}
+					<ul>
+						{% for category in categories %}
+						    <li><a href='/view/events?q={{category.category_name|removeSpacesInString}}'>
+						    {{category.category_name }}</a> 
+						    <a href='/subscription?category={{category.category_name|removeSpacesInString}}&email={{owner}}' 
+						    class="side-links">Subscribe</a></li>
+						 {% endfor %}
+					</ul>
+				</div>
+				<div class="rootParent">
+					Categories Subscribed
+					<ul>
+					{% for category in subscribedCategories %}
+					<li><a href='/view/events?q={{ category.category }}'>{{ category.category }}</a>
+					<a href='/unsubscribe?category={{category.category }}&email={{owner}}' 
+						    class="side-links">unsubscribe</a>
+					</li>
+					{% endfor %}
+					</ul>
+				</div>
+			</ul>
+			{% endblock %}
+		</div>
+		<div id="main" role="main">
+			<div id="content">
+				{% block incident %}
+				<div class="">
+					<h2>{{ title }}</h2>
+					{{ app }}
+				</div>
+				{% endblock %}
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
