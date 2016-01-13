@@ -1,7 +1,6 @@
 '''
-Created on Oct 28, 2012
+Created on Oct 28, 2015
 
-@author: paul
 '''
 import urllib
 import urllib2
