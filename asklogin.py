@@ -8,7 +8,7 @@ from landing import ViewHandler
 
 webapp.template.register_template_library('tags.filters')
 
-"""The main page handler"""
+"""The main page handler. Asks for the user to login using Google account"""
 class MainPage(webapp.RequestHandler):
     
     """Render the main page handler"""
