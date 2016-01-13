@@ -1,9 +1,11 @@
 '''
-Created on Oct 1, 2012
+Created on Oct 1, 2015
 
 @author: paul
 
-Main module to post data into the datastore
+Main module to post data into the datastore.
+
+Most of data storage functionalities are handled by handlers in this file.
 '''
 import ops
 import os
