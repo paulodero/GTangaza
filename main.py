@@ -14,6 +14,7 @@ from google.appengine.ext.webapp import util
 DIRECTORY = os.path.dirname(__file__)
 _DEBUG = True
 
+#Main handler
 class MainHandler(webapp.RequestHandler):    
     def self(self):
         values = defaultValues()
@@ -22,7 +23,8 @@ class MainHandler(webapp.RequestHandler):
         values['app'] = template.render(app_path, values, debug=_DEBUG)
         path = os.path.join(DIRECTORY, os.path.join('templates', 'page.html'))
         self.response.out.write(template.render(path, values, debug=_DEBUG))
-    
+        
+  #Handles different views of the web page
 class ViewHandler(webapp.RequestHandler):
     def self(self):
         view_info = self.request.path_info.split('/')
